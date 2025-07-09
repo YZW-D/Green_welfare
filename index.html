@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Park Exposure Equality & Equity Viewer</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+    #container {
+      width: 1060px;
+      height: 900px;
+      position: relative;
+      margin: 20px auto;
+      background: white;
+      font-family: 'Times New Roman', serif;
+      transform: scale(1);
+      transform-origin: left bottom;
+    }
+    .abs {
+      position: absolute;
+      box-sizing: border-box;
+    }
+    .label {
+      font-weight: normal;
+    }
+    .title {
+      font-weight: bold;
+      text-align: center;
+    }
+    iframe, img {
+      width: 100%;
+      height: 100%;
+    }
+    select {
+      font-family: 'Times New Roman', serif;
+      font-size: 13pt;
+      width: 225px;
+      height: 40px;
+    }
+    .zoomable {
+      overflow: hidden;
+      cursor: grab;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <!-- Labels -->
+  <div class="abs title" style="left:25px; bottom:408px; width:400px; height:50px; font-size:14pt;">Existing Situation</div>
+  <div class="abs title" style="left:635px; bottom:408px; width:400px; height:50px; font-size:14pt;">Planned Situation</div>
+  <div class="abs label" style="left:565px; bottom:775px; width:225px; height:50px; font-size:12pt; text-align:center;">Park Exposure Equality</div>
+  <div class="abs label" style="left:810px; bottom:775px; width:225px; height:50px; font-size:12pt; text-align:center;">Park Exposure Equity</div>
+  <div class="abs title" style="left:25px; bottom:715px; width:225px; height:50px; font-size:15pt;">Province</div>
+  <div class="abs title" style="left:300px; bottom:715px; width:225px; height:50px; font-size:15pt;">City</div>
+  <div class="abs title" style="left:25px; bottom:700px; width:530px; height:150px; font-size:17pt;">
+    Park Exposure Equality and Equity in Chinese Cities (Existing Situation vs. Planned Situation)
+  </div>
+
+  <!-- Dropdowns -->
+  <select id="province" class="abs" style="left:25px; bottom:700px;"></select>
+  <select id="city" class="abs" style="left:300px; bottom:700px;"></select>
+
+  <!-- Images -->
+  <div id="figA" class="abs zoomable" style="left:25px; bottom:25px; width:400px; height:400px;"></div>
+  <div id="figE" class="abs" style="left:435px; bottom:25px; width:190px; height:400px;">
+    <img src="UIData/figE.png" alt="Static Image E" />
+  </div>
+  <div id="figB" class="abs zoomable" style="left:635px; bottom:25px; width:400px; height:400px;"></div>
+  <div id="figC" class="abs" style="left:565px; bottom:475px; width:225px; height:325px;">
+    <img id="imgC" src="" alt="Improvements in Equality" />
+  </div>
+  <div id="figD" class="abs" style="left:810px; bottom:475px; width:225px; height:325px;">
+    <img id="imgD" src="" alt="Improvements in Equity" />
+  </div>
+  <div id="figX" class="abs" style="left:25px; bottom:480px; width:225px; height:200px;">
+    <img id="imgX" src="" alt="Province in China" />
+  </div>
+  <div id="figY" class="abs" style="left:300px; bottom:480px; width:225px; height:200px;">
+    <img id="imgY" src="" alt="City in Province" />
+  </div>
+</div>
+
+<script>
+  const provinceSelect = document.getElementById('province');
+  const citySelect = document.getElementById('city');
+
+  fetch('CityData_structure.json').then(res => res.json()).then(data => {
+    for (const prov in data) {
+      const opt = document.createElement('option');
+      opt.value = prov;
+      opt.textContent = prov;
+      provinceSelect.appendChild(opt);
+    }
+    provinceSelect.onchange = () => {
+      const cities = data[provinceSelect.value] || [];
+      citySelect.innerHTML = '';
+      cities.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        citySelect.appendChild(opt);
+      });
+    };
+    citySelect.onchange = () => loadFigures(provinceSelect.value, citySelect.value);
+  });
+
+  function loadFigures(province, city) {
+    const figA = document.getElementById('figA');
+    const figB = document.getElementById('figB');
+    figA.innerHTML = `<img id="imgA" src="CityData/${province}/${city}/figA.png" style="transform-origin: top left;">`;
+    figB.innerHTML = `<img id="imgB" src="CityData/${province}/${city}/figB.png" style="transform-origin: top left;">`;
+    document.getElementById('imgC').src = `CityData/${province}/${city}/figC.png`;
+    document.getElementById('imgD').src = `CityData/${province}/${city}/figD.png`;
+    document.getElementById('imgX').src = `CityData/${province}/${city}/figX.png`;
+    document.getElementById('imgY').src = `CityData/${province}/${city}/figY.png`;
+    resetTransform();
+  }
+
+  let scale = 1.0;
+  let originX = 0, originY = 0;
+  let dragging = false, startX, startY;
+
+  ['figA', 'figB'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('wheel', e => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+      const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+      const newScale = Math.max(0.5, Math.min(3.0, scale * zoomFactor));
+      originX -= (offsetX - originX) * (newScale / scale - 1);
+      originY -= (offsetY - originY) * (newScale / scale - 1);
+      scale = newScale;
+      syncTransform();
+    });
+    el.addEventListener('mousedown', e => {
+      dragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      el.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      originX += e.clientX - startX;
+      originY += e.clientY - startY;
+      startX = e.clientX;
+      startY = e.clientY;
+      syncTransform();
+    });
+    window.addEventListener('mouseup', () => {
+      dragging = false;
+      el.style.cursor = 'grab';
+    });
+  });
+
+  function syncTransform() {
+    const imgA = document.querySelector('#figA img');
+    const imgB = document.querySelector('#figB img');
+    if (imgA && imgB) {
+      const transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+      imgA.style.transform = transform;
+      imgB.style.transform = transform;
+    }
+  }
+
+  function resetTransform() {
+    scale = 1.0;
+    originX = 0;
+    originY = 0;
+    syncTransform();
+  }
+</script>
+</body>
+</html>
