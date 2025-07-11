@@ -1,7 +1,7 @@
 {
     "- -": ["- -"
   ],
-  "Anhui": ["- -",
+  "Anhui": [
     "Anqing",
     "Bengbu",
     "Bozhou",
@@ -19,13 +19,13 @@
     "Wuhu",
     "Xuancheng"
   ],
-  "Beijing": ["- -",
+  "Beijing": [
     "Beijing"
   ],
-  "Chongqing": ["- -",
+  "Chongqing": [
     "Chongqing"
   ],
-  "Fujian": ["- -",
+  "Fujian": [
     "Fuzhou(FJ)",
     "Longyan",
     "Nanping",
@@ -36,7 +36,7 @@
     "Xiamen",
     "Zhangzhou"
   ],
-  "Gansu": ["- -",
+  "Gansu": [
     "Baiyin",
     "Dingxi",
     "Gannan",
@@ -52,7 +52,7 @@
     "Wuwei",
     "Zhangye"
   ],
-  "Guangdong": ["- -",
+  "Guangdong": [
     "Chaozhou",
     "Dongguan",
     "Foshan",
@@ -75,7 +75,7 @@
     "Zhongshan",
     "Zhuhai"
   ],
-  "Guangxi": ["- -",
+  "Guangxi": [
     "Baise",
     "Beihai",
     "Chongzuo",
@@ -91,7 +91,7 @@
     "Wuzhou",
     "Yulin(GX)"
   ],
-  "Guizhou": ["- -",
+  "Guizhou": [
     "Anshun",
     "Bijie",
     "Guiyang",
@@ -102,7 +102,7 @@
     "Tongren",
     "Zunyi"
   ],
-  "Hainan": ["- -",
+  "Hainan": [
     "Baisha",
     "Chengmai",
     "Danzhou",
@@ -118,7 +118,7 @@
     "Tunchang",
     "Wenchang"
   ],
-  "Hebei": ["- -",
+  "Hebei": [
     "Baoding",
     "Cangzhou",
     "Chengde",
@@ -131,7 +131,7 @@
     "Xingtai",
     "Zhangjiakou"
   ],
-  "Heilongjiang": ["- -",
+  "Heilongjiang": [
     "Daqing",
     "Daxinganling",
     "Haerbin",
@@ -146,7 +146,7 @@
     "Suihua",
     "Yichun(HLJ)"
   ],
-  "Henan": ["- -",
+  "Henan": [
     "Anyang",
     "Hebi",
     "Jiaozuo",
@@ -166,7 +166,7 @@
     "Zhoukou",
     "Zhumadian"
   ],
-  "Hubei": ["- -",
+  "Hubei": [
     "Enshi",
     "Ezhou",
     "Huanggang",
@@ -184,7 +184,7 @@
     "Xiaogan",
     "Yichang"
   ],
-  "Hunan": ["- -",
+  "Hunan": [
     "Changde",
     "Changsha",
     "Chenzhou",
@@ -200,7 +200,7 @@
     "Zhangjiajie",
     "Zhuzhou"
   ],
-  "Inner Mongolia": ["- -",
+  "Inner Mongolia": [
     "Alashan",
     "Baotou",
     "Bayannaoer",
@@ -214,7 +214,7 @@
     "Xilinguolei",
     "Xingan"
   ],
-  "Jiangsu": ["- -",
+  "Jiangsu": [
     "Changzhou",
     "Huaian",
     "Lianyungang",
@@ -229,7 +229,7 @@
     "Yangzhou",
     "Zhenjiang"
   ],
-  "Jiangxi": ["- -",
+  "Jiangxi": [
     "Fuzhou(JX)",
     "Ganzhou",
     "Jian",
@@ -242,7 +242,7 @@
     "Yichun(JX)",
     "Yingtan"
   ],
-  "Jilin": ["- -",
+  "Jilin": [
     "Baicheng",
     "Baishan",
     "Changchun",
@@ -253,7 +253,7 @@
     "Tonghua",
     "Yanbian"
   ],
-  "Liaoning": ["- -",
+  "Liaoning": [
     "Anshan",
     "Benxi",
     "Chaoyang",
@@ -269,14 +269,14 @@
     "Tieling",
     "Yingkou"
   ],
-  "Ningxia": ["- -",
+  "Ningxia": [
     "Guyuan",
     "Shizuishan",
     "Wuzhong",
     "Yinchuan",
     "Zhongwei"
   ],
-  "Qinghai": ["- -",
+  "Qinghai": [
     "Guoluo",
     "Haibei",
     "Haidong",
@@ -286,7 +286,7 @@
     "Xining",
     "Yushu"
   ],
-  "Shaanxi": ["- -",
+  "Shaanxi": [
     "Ankang",
     "Baoji",
     "Hanzhong",
@@ -298,7 +298,7 @@
     "Yanan",
     "Yulin(SX)"
   ],
-  "Shandong": ["- -",
+  "Shandong": [
     "Binzhou",
     "Dezhou",
     "Dongying",
@@ -317,10 +317,10 @@
     "Zaozhuang",
     "Zibo"
   ],
-  "Shanghai": ["- -",
+  "Shanghai": [
     "Shanghai"
   ],
-  "Shanxi": ["- -",
+  "Shanxi": [
     "Datong",
     "Jincheng",
     "Jinzhong",
@@ -333,7 +333,7 @@
     "Yuncheng",
     "Zhangzhi"
   ],
-  "Sichuan": ["- -",
+  "Sichuan": [
     "Aba",
     "Bazhong",
     "Chengdu",
@@ -356,10 +356,10 @@
     "Zigong",
     "Ziyang"
   ],
-  "Tianjin": ["- -",
+  "Tianjin": [
     "Tianjin"
   ],
-  "Xinjiang": ["- -",
+  "Xinjiang": [
     "Akesu",
     "Alaer",
     "Aleitai",
@@ -379,7 +379,7 @@
     "Wulumuqi",
     "Yili"
   ],
-  "Xizang": ["- -",
+  "Xizang": [
     "Changdou",
     "Lasa",
     "Linzhi",
@@ -387,7 +387,7 @@
     "Rikaze",
     "Shannan"
   ],
-  "Yunnan": ["- -",
+  "Yunnan": [
     "Baoshan",
     "Chuxiong",
     "Dali",
@@ -405,7 +405,7 @@
     "Yuxi",
     "Zhaotong"
   ],
-  "Zhejiang": ["- -",
+  "Zhejiang": [
     "Hangzhou",
     "Huzhou",
     "Jiaxing",
