@@ -64,22 +64,26 @@
   <select id="city" class="abs" style="left:300px; bottom:700px;"></select>
 
   <!-- Images -->
-  <div id="figA" class="abs zoomable" style="left:25px; bottom:25px; width:400px; height:400px;"></div>
+  <div id="figA" class="abs zoomable" style="left:25px; bottom:25px; width:400px; height:400px;">
+    <img id="imgA" src="UIData/figA.png" style="transform-origin: top left;">
+  </div>
   <div id="figE" class="abs" style="left:435px; bottom:25px; width:190px; height:400px;">
     <img src="UIData/figE.png" alt="Static Image E" />
   </div>
-  <div id="figB" class="abs zoomable" style="left:635px; bottom:25px; width:400px; height:400px;"></div>
+  <div id="figB" class="abs zoomable" style="left:635px; bottom:25px; width:400px; height:400px;">
+    <img id="imgB" src="UIData/figB.png" style="transform-origin: top left;">
+  </div>
   <div id="figC" class="abs" style="left:565px; bottom:475px; width:225px; height:325px;">
-    <img id="imgC" src="" alt="Improvements in Equality" />
+    <img id="imgC" src="UIData/figC.png" alt="Improvements in Equality" />
   </div>
   <div id="figD" class="abs" style="left:810px; bottom:475px; width:225px; height:325px;">
-    <img id="imgD" src="" alt="Improvements in Equity" />
+    <img id="imgD" src="UIData/figD.png" alt="Improvements in Equity" />
   </div>
   <div id="figX" class="abs" style="left:25px; bottom:480px; width:225px; height:200px;">
-    <img id="imgX" src="" alt="Province in China" />
+    <img id="imgX" src="UIData/figX.png" alt="Province in China" />
   </div>
   <div id="figY" class="abs" style="left:300px; bottom:480px; width:225px; height:200px;">
-    <img id="imgY" src="" alt="City in Province" />
+    <img id="imgY" src="UIData/figY.png" alt="City in Province" />
   </div>
 </div>
 
@@ -103,19 +107,22 @@
         opt.textContent = c;
         citySelect.appendChild(opt);
       });
+      if (cities.length > 0) {
+        citySelect.value = cities[0];
+        loadFigures(provinceSelect.value, citySelect.value);
+      }
     };
     citySelect.onchange = () => loadFigures(provinceSelect.value, citySelect.value);
   });
 
   function loadFigures(province, city) {
-    const figA = document.getElementById('figA');
-    const figB = document.getElementById('figB');
-    figA.innerHTML = `<img id="imgA" src="CityData/${province}/${city}/figA.png" style="transform-origin: top left;">`;
-    figB.innerHTML = `<img id="imgB" src="CityData/${province}/${city}/figB.png" style="transform-origin: top left;">`;
-    document.getElementById('imgC').src = `CityData/${province}/${city}/figC.png`;
-    document.getElementById('imgD').src = `CityData/${province}/${city}/figD.png`;
-    document.getElementById('imgX').src = `CityData/${province}/${city}/figX.png`;
-    document.getElementById('imgY').src = `CityData/${province}/${city}/figY.png`;
+    const basePath = `CityData/${province}/${city}`;
+    document.getElementById('imgA').src = `${basePath}/figA.png`;
+    document.getElementById('imgB').src = `${basePath}/figB.png`;
+    document.getElementById('imgC').src = `${basePath}/figC.png`;
+    document.getElementById('imgD').src = `${basePath}/figD.png`;
+    document.getElementById('imgX').src = `${basePath}/figX.png`;
+    document.getElementById('imgY').src = `${basePath}/figY.png`;
     resetTransform();
   }
 
@@ -131,7 +138,7 @@
       const offsetX = e.clientX - rect.left;
       const offsetY = e.clientY - rect.top;
       const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-      const newScale = Math.max(0.5, Math.min(3.0, scale * zoomFactor));
+      const newScale = Math.max(0.5, Math.min(5.0, scale * zoomFactor));
       originX -= (offsetX - originX) * (newScale / scale - 1);
       originY -= (offsetY - originY) * (newScale / scale - 1);
       scale = newScale;
